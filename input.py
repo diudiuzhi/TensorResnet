@@ -109,7 +109,7 @@ def get_data_from_file():
 
     # test data
     t_datas, t_labels = _get_test_data()
-    
+
     # calc mean
     train_mean = np.mean(t_v_datas, axis=0)
 
