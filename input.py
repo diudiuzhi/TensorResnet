@@ -11,7 +11,7 @@ conf = get_conf()
 
 # get configration
 DATA_DIR = conf.get('data', 'dir')
-IMAGE_SIZE = int(conf.get('data', 'image_size'))
+IMAGE_SIZE = 36
 
 TRAIN_IMAGES = []
 TRAIN_LABELS = []
@@ -31,9 +31,13 @@ def _distorted_image(image, test=False):
     width = IMAGE_SIZE
 
     reshaped_image = tf.cast(image, tf.float32)
-    distorted_image = tf.random_crop(reshaped_image, [height, width, 3])
 
+    distorted_image = tf.image.resize_image_with_crop_or_pad(
+                                reshaped_image, 36, 36)
     if not test:
+#        distorted_image = tf.image.resize_image_with_crop_or_pad(
+#                                reshaped_image, 36, 36)
+#        distorted_image = tf.random_crop(distorted_image, [height, width, 3])
         distorted_image = tf.image.random_flip_left_right(distorted_image)
         distorted_image = tf.image.random_brightness(distorted_image,
                                                      max_delta=63)

@@ -72,7 +72,6 @@ def train(hps):
 
         while not mon_sess.should_stop():
             mon_sess.run(model.train_op)
-            print mon_sess.run(precision)
 
 
 def main(_):
